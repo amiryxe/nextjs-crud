@@ -11,6 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <h1>Hello from Next</h1>
       <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
     </div>
   )

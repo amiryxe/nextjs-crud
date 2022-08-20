@@ -8,10 +8,10 @@ import {
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
-} from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu } from 'antd';
-import React, { useState } from 'react';
-const { Header, Content, Footer, Sider } = Layout;
+} from '@ant-design/icons'
+import { Breadcrumb, Layout, Menu } from 'antd'
+import React, { useState } from 'react'
+const { Header, Content, Footer, Sider } = Layout
 
 function getItem(label, key, icon, children) {
   return {
@@ -19,7 +19,7 @@ function getItem(label, key, icon, children) {
     icon,
     children,
     label,
-  };
+  }
 }
 
 const items = [
@@ -32,10 +32,10 @@ const items = [
   ]),
   getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
   getItem('Files', '9', <FileOutlined />),
-];
+]
 
-const App = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const App = ({ Component, pageProps }) => {
+  const [collapsed, setCollapsed] = useState(false)
   return (
     <Layout
       style={{
@@ -63,8 +63,8 @@ const App = () => {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+            <Breadcrumb.Item>Page</Breadcrumb.Item>
           </Breadcrumb>
           <div
             className="site-layout-background"
@@ -73,7 +73,7 @@ const App = () => {
               minHeight: 360,
             }}
           >
-            Bill is a cat.
+            <Component {...pageProps} />
           </div>
         </Content>
         <Footer
@@ -85,7 +85,7 @@ const App = () => {
         </Footer>
       </Layout>
     </Layout>
-  );
-};
+  )
+}
 
-export default App;
+export default App
