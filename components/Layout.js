@@ -9,27 +9,20 @@ import {
 } from '@ant-design/icons'
 
 import { Breadcrumb, Layout, Menu } from 'antd'
+import Link from 'next/link'
 const { Header, Content, Footer, Sider } = Layout
 
-function getItem(label, key, icon, children) {
-    return {
-        key,
-        icon,
-        children,
-        label,
-    }
-}
-
 const items = [
-    getItem('Option 1', '1', <PieChartOutlined />),
-    getItem('Option 2', '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-        getItem('Tom', '3'),
-        getItem('Bill', '4'),
-        getItem('Alex', '5'),
-    ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem('Files', '9', <FileOutlined />),
+    {
+        key: '1',
+        icon: <PieChartOutlined />,
+        label: <Link href='/' exact>Home</Link>,
+    },
+    {
+        key: '2',
+        icon: <TeamOutlined />,
+        label: <Link href='/about' exact>About</Link>,
+    },
 ]
 
 export default function LayoutWrapper({ children }) {
