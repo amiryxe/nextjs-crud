@@ -35,7 +35,9 @@ export default function LayoutWrapper({ children }) {
             }}
         >
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-                <div className="logo" />
+                <div style={{ margin: '1.07rem' }}>
+                    <h1 style={{ color: '#fff' }}>Logo</h1>
+                </div>
                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
             </Sider>
             <Layout className="site-layout">
