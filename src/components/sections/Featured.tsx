@@ -17,8 +17,10 @@ export default async function CategoryPage() {
 
   return (
     <div className="border rounded-lg p-6">
+      <h2>Featured Products: </h2>
+
       {featuredProducts.map((product) => (
-        <div key={product.id} className="border">
+        <div key={product.id} className="border m-4 p-3 rounded-md">
           <h3>{product.title}</h3>
           <p>{product.desc}</p>
           <strong>{product.price}</strong>
