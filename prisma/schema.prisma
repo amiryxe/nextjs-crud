@@ -23,7 +23,7 @@ model Category {
 
 model Prodcut {
   id         String   @id @default(cuid())
-  createdAt  DateTime
+  createdAt  DateTime @default(now())
   title      String
   desc       String
   img        String?
