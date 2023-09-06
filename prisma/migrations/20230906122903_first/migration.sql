@@ -12,9 +12,9 @@ CREATE TABLE "Category" (
 );
 
 -- CreateTable
-CREATE TABLE "Prodcut" (
+CREATE TABLE "Product" (
     "id" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "title" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
     "img" TEXT,
@@ -23,7 +23,7 @@ CREATE TABLE "Prodcut" (
     "options" JSONB[],
     "catSlug" TEXT NOT NULL,
 
-    CONSTRAINT "Prodcut_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -45,4 +45,4 @@ CREATE UNIQUE INDEX "Category_slug_key" ON "Category"("slug");
 CREATE UNIQUE INDEX "Order_intent_id_key" ON "Order"("intent_id");
 
 -- AddForeignKey
-ALTER TABLE "Prodcut" ADD CONSTRAINT "Prodcut_catSlug_fkey" FOREIGN KEY ("catSlug") REFERENCES "Category"("slug") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Product" ADD CONSTRAINT "Product_catSlug_fkey" FOREIGN KEY ("catSlug") REFERENCES "Category"("slug") ON DELETE RESTRICT ON UPDATE CASCADE;

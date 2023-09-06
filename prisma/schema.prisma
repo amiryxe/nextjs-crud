@@ -18,10 +18,10 @@ model Category {
   color     String
   img       String
   slug      String    @unique
-  products  Prodcut[]
+  products  Product[]
 }
 
-model Prodcut {
+model Product {
   id         String   @id @default(cuid())
   createdAt  DateTime @default(now())
   title      String
