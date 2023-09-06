@@ -9,10 +9,14 @@ export const GET = async (req: NextRequest) => {
     try {
         const products = await prisma.product.findMany({
             where: {
-                price: 30
+                ...(cat ? { catSlug: cat } : { isFeatured: true })
             }
         })
-    } catch (error) {
 
+        return new NextResponse(JSON.stringify(products), { status: 200 })
+    } catch (error) {
+        console.log(error)
+
+        return new NextResponse(JSON.stringify({ message: 'Error to get data' }), { status: 500 })
     }
 }
