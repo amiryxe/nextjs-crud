@@ -1,4 +1,5 @@
 import { CategoryType } from '@/types/types'
+import Link from 'next/link'
 
 const getData = async () => {
   const res = await fetch('http://localhost:3000/api/categories', {
@@ -20,10 +21,14 @@ export default async function Categories() {
       <h1 className="text-lg font-black">List of Categories</h1>
 
       {categories.map((category) => (
-        <div key={category.id} className="border rounded-md p-4 m-4">
+        <Link
+          key={category.id}
+          href={'/categories/' + category.slug}
+          className="border rounded-md p-4 m-4 block hover:bg-slate-800"
+        >
           <h3>{category.title}</h3>
           <p>{category.desc}</p>
-        </div>
+        </Link>
       ))}
     </div>
   )
