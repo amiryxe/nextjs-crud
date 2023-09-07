@@ -2,15 +2,18 @@
 
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function LoginPage() {
   const router = useRouter()
 
   const { data, status } = useSession()
 
-  if (status === 'authenticated') {
-    router.push('/')
-  }
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/')
+    }
+  }, [status])
 
   console.log(data)
   console.log(status)
