@@ -3,6 +3,7 @@
 import { OrderType } from '@/types/types'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useSession } from 'next-auth/react'
+import { toast } from 'react-toastify'
 
 export default function Orders() {
   const { data: session } = useSession()
@@ -42,8 +43,7 @@ export default function Orders() {
     const status = input.value
 
     mutate({ status, id })
-
-    console.log(status)
+    toast.success('The order status has been changed!')
   }
 
   return (
