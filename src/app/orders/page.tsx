@@ -1,9 +1,13 @@
 'use client'
 
 import { OrderType } from '@/types/types'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useSession } from 'next-auth/react'
 
 export default function Orders() {
+  const { data: session } = useSession()
+  const queryClient = useQueryClient()
+
   const { data, isLoading, status } = useQuery({
     queryKey: ['orders'],
     queryFn: async () => {
@@ -12,7 +16,35 @@ export default function Orders() {
     },
   })
 
+  const { mutate, isLoading: isLoadingSave } = useMutation(
+    ({ status, id }: { status: string; id: string }) => {
+      return fetch(`http://localhost:3000/api/orders/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(status),
+      })
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['orders'])
+      },
+    }
+  )
+
   if (isLoading) return 'Loading...'
+
+  const submitHandler = (e: React.FormEvent, id: string) => {
+    e.preventDefault()
+    const form = e.target as HTMLFormElement
+    const input = form.elements[0] as HTMLInputElement
+    const status = input.value
+
+    mutate({ status, id })
+
+    console.log(status)
+  }
 
   return (
     <div>
@@ -20,7 +52,21 @@ export default function Orders() {
       {data?.map((item) => (
         <div className="border p-6 m-6 rounded-md shadow-gray-700 shadow-md" key={item.id}>
           <h3>Price: {item.price}</h3>
-          <p>Status: {item.status}</p>
+          <div>
+            Status:{' '}
+            {session?.user.isAdmin ? (
+              <form className="flex gap-4 mt-4" onSubmit={(e) => submitHandler(e, item.id)}>
+                <input
+                  type="text"
+                  className="p-3 rounded-md flex-1 text-black"
+                  placeholder={item.status}
+                />
+                <button className="bg-green-800 p-3 rounded-md">Save</button>
+              </form>
+            ) : (
+              <span>item.status</span>
+            )}
+          </div>
         </div>
       ))}
 
